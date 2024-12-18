@@ -58,7 +58,6 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <p className="text-primary mr-4 border-b-2 border-dashed border-primary">Welcome!</p>
             {
               user ? <>
                   <Link onClick={handleSignOut} className="btn border-2 border-primary text-primary">Log Out</Link>
