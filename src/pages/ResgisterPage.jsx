@@ -6,7 +6,7 @@ const Register = () => {
 
 
     const [showPassword, setShowPassword] = useState(false);
-    const { createUser } = useContext(AuthContext);
+    const { createUser, handleGoogleSignIn } = useContext(AuthContext);
 
 
     const handleSubmit = (e) => {
@@ -72,7 +72,7 @@ const Register = () => {
              {/*register btn & google auth  */}
             <div className="form-control mt-6">
                 <button className="btn btn-primary text-primary">Register</button>
-                <button type="button" className="btn btn-secondary text-primary mt-4">Register with Google</button>
+                <button onClick={handleGoogleSignIn} type="button" className="btn btn-secondary text-primary mt-4">Register with Google</button>
                 <span className="text-xl font-semibold text-accent mt-4">
                     Already have an Account?{" "}
                     <Link className="underline text-primary" to={"/login"}>

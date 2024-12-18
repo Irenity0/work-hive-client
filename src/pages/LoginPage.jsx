@@ -6,7 +6,7 @@ const Login = () => {
 
 
     const [showPassword, setShowPassword] = useState(false);
-    const { signInUser } = useContext(AuthContext);
+    const { signInUser, handleGoogleSignIn } = useContext(AuthContext);
 
 
     const handleSubmit = (e) => {
@@ -68,8 +68,8 @@ const Login = () => {
 
              {/*register btn & google auth  */}
             <div className="form-control mt-6">
-                <button className="btn btn-primary text-[#FFDEB6]">Login</button>
-                <button type="button" className="btn btn-secondary text-[#FFDEB6] mt-4">Login with Google</button>
+                <button className="btn btn-primary font-semibold">Login</button>
+                <button onClick={handleGoogleSignIn} type="button" className="btn btn-primary font-semibold mt-4">Login with Google</button>
                 <span className="text-xl font-semibold text-accent mt-4">
                     Don't have an Account?{" "}
                     <Link className="underline text-primary" to={"/register"}>

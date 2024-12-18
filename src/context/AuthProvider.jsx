@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
 import { auth } from "../firebase/firebase.config";
@@ -28,6 +28,20 @@ const AuthProvider = ({children}) => {
         }
     };
 
+    // google log in handler
+    const googleProvider = new GoogleAuthProvider();
+    const handleGoogleSignIn = async () => {
+        setLoading(true);
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            console.log(result);
+        } catch (error) {
+            console.error("Google Sign-In Error:", error);
+        } finally {
+            setLoading(false);  
+        }
+    }
+
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -46,7 +60,8 @@ const AuthProvider = ({children}) => {
         loading,
         createUser,
         signInUser,
-        signOutUser
+        signOutUser,
+        handleGoogleSignIn
     }
     
     return (
