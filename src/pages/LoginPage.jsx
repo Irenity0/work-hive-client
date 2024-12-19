@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const Login = () => {
@@ -7,6 +7,10 @@ const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const { signInUser, handleGoogleSignIn } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log('in signIn page', location)
+    const from = location.state || '/';
 
 
     const handleSubmit = (e) => {
@@ -18,11 +22,13 @@ const Login = () => {
 
         signInUser(email, password)
         .then(result => {
-            console.log(`sign in:`, result.user)
+            console.log('sign in:', result.user);
+            navigate(from);
         })
         .catch(error => {
-            console.log(error);
-        })
+            console.error(error);
+        });
+
 }
 
     return (
