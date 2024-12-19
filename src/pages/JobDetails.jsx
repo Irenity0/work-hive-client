@@ -19,6 +19,7 @@ const JobDetails = () => {
         hr_name,
         company_logo
     } = useLoaderData();
+    console.log(status);
 
     // Check if the application deadline has passed
     const isDeadlinePassed = new Date(applicationDeadline) < new Date();
@@ -76,16 +77,14 @@ const JobDetails = () => {
             </div>
 
             <div className="mt-8">
-                {status === "active" && !isDeadlinePassed ? (
+                {isDeadlinePassed ? (
+                    <p className="text-red-500 font-bold">
+                        The application deadline has passed. You can no longer apply for this job.
+                    </p>
+                ) : (
                     <Link to={`/jobApply/${_id}`}>
                         <button className="btn btn-primary">Apply Now</button>
-                    </Link>
-                ) : (
-                    <p className="text-red-500 font-bold">
-                        {isDeadlinePassed
-                            ? "The application deadline has passed. You can no longer apply for this job."
-                            : "This job is no longer active."}
-                    </p>
+                    </Link>   
                 )}
             </div>
         </div>
